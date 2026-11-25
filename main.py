@@ -1,20 +1,22 @@
-"""One Line, No Deadline Met — entry program.
+#!/usr/bin/env python3
+"""One-liner writer for the "no deadline met" joke.
 
-Writes a single-line joke giving an excuse for missing a deadline
-to /output/entry.txt (or $MAKEFUN_OUTPUT_DIR/entry.txt when set).
+This tiny script does exactly one job: it takes a single joke line about a
+to-do list that went on strike and writes it, followed by a newline, into a
+file called entry.txt inside the output directory chosen by the environment.
 """
 
 import os
 
-LINE = "I missed the deadline because my to-do list unionized and went on strike the moment I opened it."
+JOKE = "I missed the deadline because my to-do list unionized and went on strike the moment I opened it."
 
 
-def main() -> None:
-    output_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
-    os.makedirs(output_dir, exist_ok=True)
-    path = os.path.join(output_dir, "entry.txt")
-    with open(path, "w", encoding="utf-8") as f:
-        f.write(LINE + "\n")
+def main():
+    """Write the joke line to entry.txt in the output directory."""
+    out_dir = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
+    os.makedirs(out_dir, exist_ok=True)
+    with open(os.path.join(out_dir, "entry.txt"), "w", encoding="utf-8") as handle:
+        handle.write(JOKE + "\n")
 
 
 if __name__ == "__main__":
